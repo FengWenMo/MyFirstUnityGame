@@ -8,7 +8,30 @@ public class EnemyAI : MonoBehaviour
     public float stoppingDistance = 0.5f;  // 距离玩家多近时停止
     private Transform playerTarget;        // 玩家位置
     private Rigidbody2D rb;
-
+    [Header("攻击设置")]
+    public int damageToPlayer = 10;  // 每次接触造成的伤害
+    public float attackCooldown = 1f; // 攻击冷却时间
+    private float lastAttackTime = 0f; // 上次攻击时间
+    // 当敌人与玩家碰撞时
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        // 检查是否碰撞到玩家
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            // 检查攻击冷却
+            if (Time.time - lastAttackTime >= attackCooldown)
+            {
+                // 对玩家造成伤害
+                PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+                if (playerHealth != null)
+                {
+                    playerHealth.TakeDamage(damageToPlayer);
+                    lastAttackTime = Time.time; // 记录本次攻击时间
+                    Debug.Log($"敌人对玩家造成 {damageToPlayer} 点伤害");
+                }
+            }
+        }
+    }
     void Start()
     {
         // 获取自身的刚体
@@ -32,5 +55,6 @@ public class EnemyAI : MonoBehaviour
                 rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
             }
         }
+
     }
 }

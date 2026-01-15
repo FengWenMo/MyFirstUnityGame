@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1605487109802713045}
   - component: {fileID: 7976364327706643961}
   - component: {fileID: 2393985526291588163}
+  - component: {fileID: 4012430469840596718}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
@@ -163,3 +164,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   stoppingDistance: 0.5
+--- !u!114 &4012430469840596718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129266440091621434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6b0deccdb25e284b8e38234b22cc79d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
+  currentHealth: 0
+  enemySprite: {fileID: 0}
+  damageColor: {r: 1, g: 1, b: 1, a: 1}
+  flashDuration: 0.1
+  deathEffectPrefab: {fileID: 0}

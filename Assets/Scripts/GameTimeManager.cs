@@ -12,7 +12,6 @@ public class GameTimeManager : MonoBehaviour
     public float dayDurationInSeconds = 60f;  // 白天持续时间（秒）
     public float nightDurationInSeconds = 60f; // 夜晚持续时间（秒）
     public int daysToBloodMoon = 7; // 每几天一次血月
-
     private float timerInCurrentPhase;
     private int currentDay = 1;
     private bool isBloodMoonActive = false;
@@ -21,7 +20,10 @@ public class GameTimeManager : MonoBehaviour
     public static event Action<GamePhase> OnPhaseChanged;
     public static event Action<int> OnDayChanged;
     public static event Action OnBloodMoonStart; // 血月开始事件
-
+ // 添加这行，让其他脚本可以读取当前天数
+    public int CurrentDay { get { return currentDay; } }
+    // 引用UI组件
+    private DayDisplayUI dayDisplayUI;
     void Update()
     {
         timerInCurrentPhase += Time.deltaTime;
@@ -46,6 +48,19 @@ public class GameTimeManager : MonoBehaviour
                 }
                 break;
         }
+    }
+ // 添加Start方法
+    void Start()
+    {
+        // 初始化为白天
+        CurrentPhase = GamePhase.Day;
+        timerInCurrentPhase = 0f;
+        
+        // 触发初始事件
+        OnDayChanged?.Invoke(currentDay);
+        OnPhaseChanged?.Invoke(CurrentPhase);
+        
+        Debug.Log($"游戏开始: 第{currentDay}天，{CurrentPhase}");
     }
 
     private void SwitchToPhase(GamePhase newPhase)

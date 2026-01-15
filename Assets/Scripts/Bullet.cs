@@ -18,7 +18,12 @@ public class Bullet : MonoBehaviour
     if (enemy != null)
     {
         // 如果击中敌人，销毁敌人（后续可替换为扣血逻辑）
-        Destroy(enemy.gameObject);
+        EnemyHealth enemyHealth = hitInfo.GetComponent<EnemyHealth>();
+        if (enemyHealth != null)
+        {
+            // 调用敌人的受伤方法
+            enemyHealth.TakeDamage(damage);
+        }
     }
     
     // 无论击中什么（除了玩家），都销毁子弹
