@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4012430469840596718}
   m_Layer: 8
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -164,6 +164,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   stoppingDistance: 0.5
+  damageToPlayer: 10
+  damageToWall: 5
+  attackCooldown: 1
+  attackRange: 1
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  wallDetectionRange: 2
+  attackEffect: {fileID: 0}
+  effectDuration: 0.3
 --- !u!114 &4012430469840596718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,3 +192,7 @@ MonoBehaviour:
   damageColor: {r: 1, g: 1, b: 1, a: 1}
   flashDuration: 0.1
   deathEffectPrefab: {fileID: 0}
+  coinPrefab: {fileID: 7821006135139559433, guid: 1e0f6d18f4d2d0242875e450522e1bf8, type: 3}
+  coinDropChance: 0.3
+  minCoins: 1
+  maxCoins: 3

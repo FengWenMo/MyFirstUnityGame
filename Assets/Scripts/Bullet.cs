@@ -25,7 +25,14 @@ public class Bullet : MonoBehaviour
             enemyHealth.TakeDamage(damage);
         }
     }
-    
+     // 2. 检查是否击中了墙体
+    WallHealth wallHealth = hitInfo.GetComponent<WallHealth>();
+    if (wallHealth != null)
+    {
+        wallHealth.TakeDamage(1);  // 每发子弹对墙体造成1点伤害
+        Destroy(gameObject);
+        return;
+    }
     // 无论击中什么（除了玩家），都销毁子弹
     // 注意：确保玩家和子弹在不同物理层（Layer），且不相互碰撞
     Destroy(gameObject);

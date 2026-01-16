@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     public Transform firePoint;     // 子弹生成位置（我们将指定为枪口）
     public float bulletForce = 20f; // 子弹发射速度
 
+    // 添加公共属性用于数据收集
+    public bool isMoving { get; private set; }
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -24,6 +26,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        // 在移动逻辑中更新状态
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveY = Input.GetAxisRaw("Vertical");
+        
+        // 更新移动状态
+        isMoving = Mathf.Abs(moveX) > 0.1f || Mathf.Abs(moveY) > 0.1f;
         // 移动输入（保持不变）
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");

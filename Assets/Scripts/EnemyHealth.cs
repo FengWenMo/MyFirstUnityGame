@@ -18,7 +18,11 @@ public class EnemyHealth : MonoBehaviour
     
     private Color originalColor;  // 保存原始颜色
     private bool isFlashing = false;  // 防止重复闪烁
-    
+    [Header("金币掉落设置")]
+    public GameObject coinPrefab;           // 金币预制体
+    public float coinDropChance = 0.3f;     // 30%掉落概率
+    public int minCoins = 1;                // 最少掉落金币数
+    public int maxCoins = 3;                // 最多掉落金币数
     void Start()
     {
         // 初始化生命值
@@ -90,6 +94,8 @@ public class EnemyHealth : MonoBehaviour
         {
         ScoreManager.Instance.AddKillScore();
         }
+        // 有概率掉落金币
+        DropCoins();
         // 播放死亡特效（如果有）
         if (deathEffectPrefab != null)
         {
@@ -98,5 +104,31 @@ public class EnemyHealth : MonoBehaviour
         
         // 销毁敌人对象
         Destroy(gameObject);
+    }
+    private void DropCoins()
+    {
+        if (coinPrefab == null) return;
+        
+        // 随机决定是否掉落
+        if (Random.Range(0f, 1f) <= coinDropChance)
+        {
+            // 随机掉落数量
+            int coinCount = Random.Range(minCoins, maxCoins + 1);
+            
+            for (int i = 0; i < coinCount; i++)
+            {
+                // 计算随机偏移，让金币分散一点
+                Vector3 randomOffset = new Vector3(
+                    Random.Range(-0.5f, 0.5f),
+                    Random.Range(-0.5f, 0.5f),
+                    0
+                );
+                
+                // 实例化金币
+                Instantiate(coinPrefab, transform.position + randomOffset, Quaternion.identity);
+            }
+            
+            Debug.Log($"掉落 {coinCount} 枚金币");
+        }
     }
 }
