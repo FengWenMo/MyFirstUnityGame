@@ -404,7 +404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dayDurationInSeconds: 10
-  nightDurationInSeconds: 10
+  nightDurationInSeconds: 30
   daysToBloodMoon: 2
 --- !u!4 &152361907
 Transform:
@@ -571,6 +571,66 @@ MonoBehaviour:
   dayText: {fileID: 266551044}
   prefix: "\u7B2C"
   suffix: "\u5929"
+--- !u!1 &285828601
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 285828603}
+  - component: {fileID: 285828602}
+  m_Layer: 0
+  m_Name: RandomWallGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &285828602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285828601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee353221e00cc724d87a021fcec4f69d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallPrefab: {fileID: 644533498434018013, guid: c4256b2fa438ed048bb0d969dff57028, type: 3}
+  wallCount: 30
+  safeRadius: 5
+  gridSize: 20
+  gridSpacing: 1
+  forceGridAlignment: 1
+  groupingFactor: 0.3
+  maxPlacementAttempts: 20
+  randomizeHealth: 1
+  minHealth: 20
+  maxHealth: 60
+  maxGenerationTimePerFrame: 0.016
+  maxWallsPerFrame: 5
+  debugLogs: 1
+  drawGridGizmos: 1
+  gridColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+--- !u!4 &285828603
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285828601}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.1115918, y: 0.9944664, z: 0.05877475}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &308282424
 GameObject:
   m_ObjectHideFlags: 0
@@ -2030,6 +2090,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1545103611}
+  - component: {fileID: 1545103612}
   m_Layer: 0
   m_Name: WaveManager
   m_TagString: Untagged
@@ -2052,6 +2113,87 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1545103612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545103610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3717945c280d8054087a6798a8931fe8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  phaseSettings:
+  - phase: 0
+    isActive: 1
+    wavesForThisPhase:
+    - enemyPrefab: {fileID: 2129266440091621434, guid: 902a52d2cc6357c4d83722aa7692701f, type: 3}
+      enemyCount: 3
+      spawnInterval: 0
+      isSpecialWave: 0
+      specialWaveDelay: 0
+    - enemyPrefab: {fileID: 2129266440091621434, guid: 902a52d2cc6357c4d83722aa7692701f, type: 3}
+      enemyCount: 5
+      spawnInterval: 0
+      isSpecialWave: 0
+      specialWaveDelay: 0
+    timeBetweenWaves: 1
+    phaseDuration: 10
+    loopWaves: 1
+    loopInterval: 40
+  - phase: 1
+    isActive: 1
+    wavesForThisPhase:
+    - enemyPrefab: {fileID: 2129266440091621434, guid: 902a52d2cc6357c4d83722aa7692701f, type: 3}
+      enemyCount: 5
+      spawnInterval: 0.1
+      isSpecialWave: 0
+      specialWaveDelay: 0
+    - enemyPrefab: {fileID: 2129266440091621434, guid: 902a52d2cc6357c4d83722aa7692701f, type: 3}
+      enemyCount: 8
+      spawnInterval: 0.2
+      isSpecialWave: 0
+      specialWaveDelay: 0
+    - enemyPrefab: {fileID: 2129266440091621434, guid: 902a52d2cc6357c4d83722aa7692701f, type: 3}
+      enemyCount: 12
+      spawnInterval: 0.3
+      isSpecialWave: 0
+      specialWaveDelay: 0
+    timeBetweenWaves: 2
+    phaseDuration: 30
+    loopWaves: 1
+    loopInterval: 40
+  - phase: 2
+    isActive: 1
+    wavesForThisPhase:
+    - enemyPrefab: {fileID: 4690890377713845391, guid: cc101dde4e3955e459a7b094d5328acc, type: 3}
+      enemyCount: 15
+      spawnInterval: 0.3
+      isSpecialWave: 0
+      specialWaveDelay: 0
+    - enemyPrefab: {fileID: 2129266440091621434, guid: 902a52d2cc6357c4d83722aa7692701f, type: 3}
+      enemyCount: 20
+      spawnInterval: 0.5
+      isSpecialWave: 0
+      specialWaveDelay: 0
+    timeBetweenWaves: 2
+    phaseDuration: 30
+    loopWaves: 1
+    loopInterval: 40
+  currentPhaseSetting:
+    phase: 0
+    isActive: 1
+    wavesForThisPhase: []
+    timeBetweenWaves: 10
+    phaseDuration: 300
+    loopWaves: 0
+    loopInterval: 30
+  currentWaveIndex: 0
+  isSpawning: 0
+  phaseStartTime: 0
+  enemySpawner: {fileID: 999042497}
 --- !u!1 &1581762225
 GameObject:
   m_ObjectHideFlags: 0
@@ -2646,3 +2788,4 @@ SceneRoots:
   - {fileID: 1170839663}
   - {fileID: 57895916}
   - {fileID: 1516834097}
+  - {fileID: 285828603}
