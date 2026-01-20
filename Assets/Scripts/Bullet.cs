@@ -15,7 +15,8 @@ public class Bullet : MonoBehaviour
         // 这里可以检查击中了什么，例如：
     // 检查是否击中了带有 EnemyAI 脚本的对象
     EnemyAI enemy = hitInfo.GetComponent<EnemyAI>();
-    if (enemy != null)
+    SuicideEnemyAI enemy_3 = hitInfo.GetComponent<SuicideEnemyAI>();
+    if (enemy != null || enemy_3 !=null)
     {
         // 如果击中敌人，销毁敌人（后续可替换为扣血逻辑）
         EnemyHealth enemyHealth = hitInfo.GetComponent<EnemyHealth>();

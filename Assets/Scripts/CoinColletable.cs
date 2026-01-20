@@ -13,12 +13,17 @@ public class CoinCollectable : MonoBehaviour
     public float floatAmplitude = 0.2f; // 上下浮动幅度
     public float floatFrequency = 1f;   // 浮动频率
     
+    [Header("自动销毁设置")]
+    public float autoDestroyTime = 30f;  // 自动销毁时间（秒）
+    
     private Vector3 startPosition;
     private float floatTimer = 0f;
+    private float spawnTime;  // 生成时间
     
     void Start()
     {
         startPosition = transform.position;
+        spawnTime = Time.time;  // 记录生成时间
     }
     
     void Update()
@@ -30,6 +35,12 @@ public class CoinCollectable : MonoBehaviour
         floatTimer += Time.deltaTime;
         float newY = startPosition.y + Mathf.Sin(floatTimer * floatFrequency) * floatAmplitude;
         transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+        
+        // 自动销毁检查
+        if (Time.time - spawnTime >= autoDestroyTime)
+        {
+            Destroy(gameObject);
+        }
     }
     
     // 当被玩家触碰时
